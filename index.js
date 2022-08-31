@@ -2,14 +2,14 @@
 
 let precio = 0;
 let envio = 0;
-let costo = precio*cantidad;
-let costoFinalConEnvio= costo+envio;
+let costo = precio * cantidad;
+let costoFinalConEnvio = costo + envio;
 let costoFinalSinEnvio = costo;
 
-let pedido = parseInt(prompt(`Selecciona tu pedido
-1 - Triple 
-2 - Doble 
-3 - Simple 
+let pedido = parseInt(prompt(` Hola, gracias por elegirnos.Selecciona tu pedido
+1 - Hamburguesa Triple 
+2 - Hamburguesa Doble 
+3 - Hamburguesa Simple 
 4 - Aros de cebolla 
 5 - Papas fritas
 `));
