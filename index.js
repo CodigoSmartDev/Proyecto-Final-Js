@@ -1,18 +1,31 @@
 
 
-let precio = 0;
-let envio = 0;
-let costo = precio * cantidad;
-let costoFinalConEnvio = costo + envio;
-let costoFinalSinEnvio = costo;
 
-let pedido = parseInt(prompt(` Hola, gracias por elegirnos.Selecciona tu pedido
+function total(){
+    let precio = 0;
+    let envio = 150;
+
+        // Con el Array Menú hago la impreción en pantalla del pedido.
+    let menu = [
+    " ",
+    " Hamburguesa Triple",
+    " Hamburguesa Doble",
+    " Hamburguesa Simple",
+    " Aros de Cebolla",
+    " Papas Fritas"
+    ];
+
+
+    // Ingreso de datos para la simulacion de compra.
+
+ let pedido = parseInt(prompt(` Bienvenido a Burguer, Selecciona tu pedido
 1 - Hamburguesa Triple 
 2 - Hamburguesa Doble 
 3 - Hamburguesa Simple 
 4 - Aros de cebolla 
 5 - Papas fritas
 `));
+
 
 if(pedido === 1){
     precio = precio + 1250
@@ -33,33 +46,52 @@ if(pedido === 1){
 }else if(pedido === 5){
     precio = precio + 650
     alert(`Papas fritas con chedar y bacon. Su valor es de $650.`);
-}else if(pedido != [1,2,3,4,5]){
-    alert(`Su pedido es incorrecto`);
-    return;
-}
-
-let cantidad = parseInt(prompt(`Cuantas vas a pedir?`));
-
-if(cantidad >= 1){
-    alert(`Listo, tu pedio esta en marcha. El costo de tu pedido es ${costoFinalSinEnvio}.`);
-}
-
-let delivery = prompt(`Querés que lo enviemos? Se aplicará un recargo de $150.`);
-
-if( delivery.tolocalLowerCase() === "si"){
-    envio = envio + 150;
-    alert(`Tu pedido llegarrá en 40 minutos. Te estaremos avisando cuando salga. El total es de ${costoFinalConEnvio}`);
 }else{
-    alert(`Pasá a retirarlo por el local. En 20 minutos estará listo. El total es de ${costoFinalSinEnvio}`);
-}
-
-let pago = parseInt(prompt(`Elegí la forma de pago
-1 - Efectivo
-2 - Pago virtual`));
-
-if(pago === 1){
-    alert(`Con cúanto abonas, asi te enviamos el vuelto? El total es de ${costoFinalConEnvio}`);
- }else{
-    alert(`El total es de ${costoFinalConEnvio}`);
+    alert(`Su pedido es incorrecto`);
+    total();
  }
 
+    // Agregué DoWhile para ingresos erroneos.
+
+ let cantidad;
+ do {
+    cantidad =parseInt(prompt(`Cuantas vas a pedir?`));
+ } while (isNaN(cantidad));
+
+    let costo = cantidad*precio;
+    alert(`El costo de tu pedido es de $ ${costo}.`);
+
+let delivery; 
+do {
+    delivery = prompt(`Querés que lo enviemos? Se aplicará un recargo de $150. (si/no)`);
+} while (delivery != `si` && delivery != `no`);
+
+if( delivery.toLocaleLowerCase() === "si"){
+
+    let pago; 
+    do {
+        pago = parseInt(prompt(`Elegí la forma de pago
+    1 - Efectivo
+    2 - Pago virtual`));
+    }while(pago != 1 && pago != 2);
+
+        if(pago === 1){
+            costoFinalConEnvio = costo+envio;
+            alert(`El total es de $ ${costoFinalConEnvio}`);     
+
+        }else if(pago === 2){
+            costoFinalConEnvio = costo+envio;
+            alert(`El total es de $ ${costoFinalConEnvio}, quedamos a la espera del comprobante para iniciar el pedido`);
+        }
+    }else if(delivery.toLocaleLowerCase() === "no"){
+        costoFinalSinEnvio = costo;
+        alert(`En 20 minutos estará listo. El total es de $ ${costoFinalSinEnvio}. Te esperamos, Gracias!!!`);
+    }
+
+    document.write(`Tu pedido es el siguiente: ${cantidad}`);
+    document.write( menu [ pedido ]);
+}
+
+total();
+
+  
