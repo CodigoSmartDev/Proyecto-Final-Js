@@ -9,7 +9,10 @@ body{
     background: rgb(40, 40, 55);
     background: linear-gradient(344 deg, rgba(40, 40, 55, 1) 0%, rgba(16, 16, 18, 1) 50%);
     margin: 5px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
    }
+
+   /* Navbar */
 
    .content-nav{
     --background: linear-gradient(to left, #f7ba2b 0%, #ea5358 100%);
@@ -46,6 +49,19 @@ body{
     fill: currentColor;
   }
 
+    /* Titulo */
+
+  .titulo{
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #ddd;
+    margin: 30px;
+  }
+
+    /* Contenido */
 
 .content{
     display: flex;
@@ -54,6 +70,7 @@ body{
     
    }
 
+     /* Tarjetas */
 
 .card {
     width: 220px;
@@ -76,7 +93,9 @@ body{
    }
    
    .card-info {
-    padding-top: 15%;
+    margin: 10% 0;
+    height: 75px;
+
    }
    
    .content svg {
@@ -90,12 +109,14 @@ body{
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-content: stretch;
     align-items: center;
     padding-top: 5px;
     border-top: 1px solid #ddd;
    }
    
-   /*Text*/
+    /* Texto */
+
    .text-title {
     font-weight: 900;
     font-size: 1.1em;
@@ -105,10 +126,11 @@ body{
    
    .text-body {
     font-size: .85em;
-    padding-bottom: 5px;
+    margin-bottom: 5px;
    }
    
-   /*Button*/
+    /* Button */
+
    .card-button {
     border: 1px solid #5dcf89;
     display: flex;
@@ -118,7 +140,8 @@ body{
     transition: .3s ease-in-out;
    }
    
-   /*Hover*/
+    /* Hover */
+
    .card-img:hover {
     transform: translateY(-5%);
     box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
