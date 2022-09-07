@@ -12,28 +12,19 @@ function total(){
     "Aros de cebolla"
     ];
 
-    // carta.forEach(item => {
-    //     alert(item);
-    // })
     
     const menus = [
         {nombre: "Hamburguesa Triple", precio: 1250},
         {nombre: "Hamburguesa Doble", precio: 1100},
         {nombre:"Hamburguesa Simple", precio: 1000},
-        {nombre: "Papas Fritas", precio:650},
+        {nombre: "Papas Fritas", precio: 650},
         {nombre: "Aros de Cebolla", precio: 500},
     ]
 
-    let nombre = prompt(`Podes buscar el menú que decees.`);
-    let menu = menus.find(item => item.nombre === nombre);
-    console.log(menu);
+    let valor = parseInt(prompt(`Ingresá cuanto querés gastar y te decimos lo que tenés disponible.`));
+    let filtrados = menus.filter(item => item.precio < valor);
+    console.log(filtrados);
 
-
-
-    // let nombre = prompt(`Ingresa el valor que quieres gastar`);
-    //  carta = carta.filter(item => item.precio === precio);
-    // console.log(`Tenemos para ofrecerte ${nombre} ${precio}`)
-    // Ingreso de datos para la simulacion de compra.
 
  let pedido = parseInt(prompt(` Bienvenido a Burguer, Selecciona tu pedido
 1 - Hamburguesa Triple $1250
