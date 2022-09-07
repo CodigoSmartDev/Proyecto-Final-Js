@@ -6,24 +6,41 @@ function total(){
     let envio = 150;
 
         // Con el Array Menú hago la impreción en pantalla del pedido.
-    let menu = [
-    " ",
-    " Hamburguesa Triple",
-    " Hamburguesa Doble",
-    " Hamburguesa Simple",
-    " Aros de Cebolla",
-    " Papas Fritas"
+
+    const carta = [
+    "Hamburguesa triple", "Hamburguesa doble", "Hamburguesa simple", "Papas fritas",
+    "Aros de cebolla"
     ];
 
+    // carta.forEach(item => {
+    //     alert(item);
+    // })
+    
+    const menus = [
+        {nombre: "Hamburguesa Triple", precio: 1250},
+        {nombre: "Hamburguesa Doble", precio: 1100},
+        {nombre:"Hamburguesa Simple", precio: 1000},
+        {nombre: "Papas Fritas", precio:650},
+        {nombre: "Aros de Cebolla", precio: 500},
+    ]
 
+    let nombre = prompt(`Podes buscar el menú que decees.`);
+    let menu = menus.find(item => item.nombre === nombre);
+    console.log(menu);
+
+
+
+    // let nombre = prompt(`Ingresa el valor que quieres gastar`);
+    //  carta = carta.filter(item => item.precio === precio);
+    // console.log(`Tenemos para ofrecerte ${nombre} ${precio}`)
     // Ingreso de datos para la simulacion de compra.
 
  let pedido = parseInt(prompt(` Bienvenido a Burguer, Selecciona tu pedido
-1 - Hamburguesa Triple 
-2 - Hamburguesa Doble 
-3 - Hamburguesa Simple 
-4 - Aros de cebolla 
-5 - Papas fritas
+1 - Hamburguesa Triple $1250
+2 - Hamburguesa Doble $1100
+3 - Hamburguesa Simple $1000
+5 - Papas fritas $650
+4 - Aros de cebolla $500
 `));
 
 
@@ -40,12 +57,12 @@ if(pedido === 1){
     alert(`Hamburguesa de una sola carne mas cheddar, cebolla, lechuga, tomate y salsa. Incluyen papas y gaseosa. Su valor es de $1000.`);
 
 }else if(pedido === 4){
-    precio = precio + 500
-    alert(`Aros de cebollas crujientes con dos salsas. Su valor es de $500.`);
-
-}else if(pedido === 5){
     precio = precio + 650
     alert(`Papas fritas con chedar y bacon. Su valor es de $650.`);
+    
+}else if(pedido === 5){
+    precio = precio + 500
+    alert(`Aros de cebollas crujientes con dos salsas. Su valor es de $500.`);
 }else{
     alert(`Su pedido es incorrecto`);
     total();
@@ -88,8 +105,8 @@ if( delivery.toLocaleLowerCase() === "si"){
         alert(`En 20 minutos estará listo. El total es de $ ${costoFinalSinEnvio}. Te esperamos, Gracias!!!`);
     }
 
-    document.write(`Tu pedido es el siguiente: ${cantidad}`);
-    document.write( menu [ pedido ]);
+    document.write(`Tu pedido es el siguiente: ${cantidad} `);
+    document.write( carta [ pedido ]);
 }
 
 total();

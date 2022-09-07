@@ -63,10 +63,11 @@ body{
 
     /* Contenido */
 
-.content{
-    display: flex;
-    justify-content: center;
-    align-content: center;
+.content-cards{
+    display: grid;
+    /* justify-content: center;
+    align-content: center; */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     
    }
 
@@ -98,7 +99,7 @@ body{
 
    }
    
-   .content svg {
+   .content-cards svg {
     width: 25px;
     height: 25px;
     background: #5dcf89;
@@ -138,6 +139,10 @@ body{
     cursor: pointer;
     border-radius: 50px;
     transition: .3s ease-in-out;
+   }
+
+   .filter{
+    display: none;
    }
    
     /* Hover */
