@@ -1,19 +1,18 @@
-import hamburgerMenu from "./Js/menu_hamburguesa.js";
 import searchFilters from "./Js/filtro_busqueda.js";
+import hamburgerMenu from "./Js/menu_hamburguesa.js";
 
 const d = document;
 
 d.addEventListener("DOMContentLoaded", (e)=>{
     
-    searchFilters(".filtro", ".card");
+    searchFilters(".search", ".card");
      
     hamburgerMenu(".panel-btn", ".panel", ".menu ul a");
 
-    darkMode("#toggle-label" )
 });
 
 
-    // Darck Mode
+    // ---- Darck Mode ----
     
     const themeActual = localStorage.getItem(`theme`)
     const toggle = d.querySelector(`#toggle`);
@@ -37,6 +36,123 @@ d.addEventListener("DOMContentLoaded", (e)=>{
     };
 
     toggle.addEventListener(`click`, cambiarTheme);
+
+     // -----------------------
+
+
+
+    // ----- Carrito -----
+
+    let contenidoCarrito= document.querySelector('.producto'); 
+    let contenidoCompra = document.querySelector('.items-carrito'); 
+    let precioTotal = document.querySelector('.precio-total') 
+    let cantidadProducto = document.querySelector('.contador'); 
+     
+     
+    let compra= []; 
+    let total = 0; 
+    let contadorProducto= 0; 
+     
+   
+    loadEventListenrs(); 
+    function loadEventListenrs(){ 
+        contenidoCarrito.addEventListener('click', agregarProducto); 
+    
+        contenidoCompra.addEventListener('click', eliminarProducto); 
+    } 
+     
+    function agregarProducto(e){ 
+        e.preventDefault(); 
+        if(e.target.classList.contains('btn-agregar')){ 
+        const selectProducto = e.target.parentElement;
+        cargarContenido(selectProducto); 
+        } 
+    } 
+     
+    function eliminarProducto(e){ 
+        if (e.target.classList.contains('eliminar-producto')){ 
+            const deleteId = e.target.getAttribute('data-id'); 
+     
+            compra.forEach(value => { 
+                if (value.id == deleteId){ 
+                let precioReduce = precio * cantidad; 
+                total = total - precioReduce; 
+                total = total; 
+                                    } 
+            }); 
+                compra = compra.filter(producto => producto.id !== deleteId); 
+                contadorProducto --; 
+            } 
+
+            // El contador se quedaba con "1" aunque hubiera 0 productos 
+                if (compra.length === 0){ 
+                    precioTotal.innerHTML = 0; 
+                    cantidadProducto.innerHTML = 0; 
+                } 
+                loadHtml(); 
+        } 
+     
+        function cargarContenido(producto){ 
+            const infoProducto = { 
+                imagen: producto.querySelector('div .card-img img').src, 
+                titulo: producto.querySelector('.text-title').textContent, 
+                precio: producto.querySelector('span .precio').textContent, 
+                id: producto.querySelector('a').getAttribute('data-id'), 
+                cantidad: 1 
+            } 
+     
+                total = total + infoProducto.precio; 
+                total = total; 
+     
+            const existe= compra.some(producto => producto.id === infoProducto.id); 
+                if (existe){ 
+                const prod = compra.map(producto => { 
+                if (producto.id === infoProducto.id){ 
+                    producto.cantidad ++; 
+                    return producto; 
+                }else{ 
+                    return producto; 
+                } 
+            }); 
+                compra = [...prod]; 
+            }else{ 
+                compra = [...compra, infoProducto] 
+                contadorProducto ++; 
+        } 
+            loadHtml(); 
+    
+        } 
+     
+        function loadHtml(){ 
+                    clearHtml(); 
+                    compra.forEach(producto => { 
+                    const{imagen, titulo, precio , cantidad, id}= producto; 
+                    const row= document.createElement('div'); 
+                    row.classList.add('item'); 
+                    row.innerHTML= ` 
+                    <img src="${imagen}"alt=""> 
+                    <div class="item-content"> 
+                     <h5>${titulo}</h5> 
+                     <h5 class="cart-precio">${precio}$</h5> 
+                     <h6>cantidad:${cantidad}</h6> 
+                    </div> 
+                    <span class="eliminar-producto"data-id="${id}">X</span> 
+            `;                                                                                 
+     
+            contenidoCompra.appendChild(row); 
+     
+            precioTotal.innerHTML = total; 
+
+            cantidadProducto.innerHTML = contadorProducto; 
+        }); 
+    } 
+            function clearHtml(){ 
+            contenidoCompra.innerHTML = ''; 
+        }
+        
+
+
+        //  -------------------------
 
 
 
