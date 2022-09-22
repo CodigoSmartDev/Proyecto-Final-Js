@@ -43,81 +43,80 @@ d.addEventListener("DOMContentLoaded", (e)=>{
 
     // ----- Carrito -----
 
-    let contenidoCarrito= document.querySelector('.producto'); 
+    let contenidoCarrito= document.querySelector('.productos'); 
     let contenidoCompra = document.querySelector('.items-carrito'); 
     let precioTotal = document.querySelector('.precio-total') 
-    let cantidadProducto = document.querySelector('.contador'); 
+    let cantidadproductos = document.querySelector('.contador'); 
      
      
     let compra= []; 
+    let contadorProductos= 0; 
     let total = 0; 
-    let contadorProducto= 0; 
      
    
     loadEventListenrs(); 
     function loadEventListenrs(){ 
-        contenidoCarrito.addEventListener('click', agregarProducto); 
+        contenidoCarrito.addEventListener('click', agregarProductos); 
     
-        contenidoCompra.addEventListener('click', eliminarProducto); 
+        contenidoCompra.addEventListener('click', eliminarProductos); 
     } 
      
-    function agregarProducto(e){ 
+    function agregarProductos(e){ 
         e.preventDefault(); 
         if(e.target.classList.contains('btn-agregar')){ 
-        const selectProducto = e.target.parentElement;
-        cargarContenido(selectProducto); 
+        const selectproductos = e.target.parentElement;
+        cargarContenido(selectproductos); 
         } 
     } 
      
-    function eliminarProducto(e){ 
-        if (e.target.classList.contains('eliminar-producto')){ 
+    function eliminarProductos(e){ 
+        if (e.target.classList.contains('btn-eliminar')){ 
             const deleteId = e.target.getAttribute('data-id'); 
      
             compra.forEach(value => { 
                 if (value.id == deleteId){ 
                 let precioReduce = precio * cantidad; 
-                total = total - precioReduce; 
-                total = total; 
+                total = total - precioReduce;  
                                     } 
             }); 
-                compra = compra.filter(producto => producto.id !== deleteId); 
-                contadorProducto --; 
+                compra = compra.filter(productos => productos.id !== deleteId); 
+                contadorProductos --; 
             } 
 
-            // El contador se quedaba con "1" aunque hubiera 0 productos 
+            // El contador se quedaba con "1" aunque hubiera 0 productoss 
                 if (compra.length === 0){ 
                     precioTotal.innerHTML = 0; 
-                    cantidadProducto.innerHTML = 0; 
+                    cantidadproductos.innerHTML = 0; 
                 } 
                 loadHtml(); 
         } 
      
-        function cargarContenido(producto){ 
-            const infoProducto = { 
-                imagen: producto.querySelector('div .card-img img').src, 
-                titulo: producto.querySelector('.text-title').textContent, 
-                precio: producto.querySelector('span .precio').textContent, 
-                id: producto.querySelector('a').getAttribute('data-id'), 
+        function cargarContenido(productos){ 
+            const infoProductos = { 
+                imagen: productos.querySelector('div img').src, 
+                titulo: productos.querySelector('.text-title').textContent, 
+                precio: productos.querySelector('span .precio').textContent, 
+                id: productos.querySelector('a').getAttribute('data-id'), 
                 cantidad: 1 
             } 
      
-                total = total + infoProducto.precio; 
-                total = total; 
+            total = total + infoProductos.precio; 
+                
      
-            const existe= compra.some(producto => producto.id === infoProducto.id); 
+            const existe= compra.some(productos => productos.id === infoProductos.id); 
                 if (existe){ 
-                const prod = compra.map(producto => { 
-                if (producto.id === infoProducto.id){ 
-                    producto.cantidad ++; 
-                    return producto; 
+                const prod = compra.map(productos => { 
+                if (productos.id === infoProductos.id){ 
+                    productos.cantidad ++; 
+                    return productos; 
                 }else{ 
-                    return producto; 
+                    return productos; 
                 } 
             }); 
                 compra = [...prod]; 
             }else{ 
-                compra = [...compra, infoProducto] 
-                contadorProducto ++; 
+                compra = [...compra, infoProductos] 
+                contadorProductos ++; 
         } 
             loadHtml(); 
     
@@ -125,25 +124,25 @@ d.addEventListener("DOMContentLoaded", (e)=>{
      
         function loadHtml(){ 
                     clearHtml(); 
-                    compra.forEach(producto => { 
-                    const{imagen, titulo, precio , cantidad, id}= producto; 
-                    const row= document.createElement('div'); 
+                    compra.forEach(productos => { 
+                    const {imagen, titulo, precio, cantidad, id} = productos; 
+                    const row = document.createElement('div'); 
                     row.classList.add('item'); 
-                    row.innerHTML= ` 
-                    <img src="${imagen}"alt=""> 
+                    row.innerHTML = ` 
+                    <img src= "${imagen}" alt="imagen"> 
                     <div class="item-content"> 
-                     <h5>${titulo}</h5> 
-                     <h5 class="cart-precio">${precio}$</h5> 
-                     <h6>cantidad:${cantidad}</h6> 
+                     <h5> ${titulo}</h5> 
+                     <h5 class= "carrito-precio">${precio}$</h5> 
+                     <h6> cantidad:${cantidad}</h6> 
                     </div> 
-                    <span class="eliminar-producto"data-id="${id}">X</span> 
+                    <span class="btn-eliminar" data-id= "${id}">X</span> 
             `;                                                                                 
      
             contenidoCompra.appendChild(row); 
      
             precioTotal.innerHTML = total; 
 
-            cantidadProducto.innerHTML = contadorProducto; 
+            cantidadproductos.innerHTML = contadorProductos; 
         }); 
     } 
             function clearHtml(){ 
