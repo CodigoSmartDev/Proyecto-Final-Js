@@ -47,6 +47,7 @@ d.addEventListener("DOMContentLoaded", (e)=>{
     let contenidoCompra = document.querySelector('.items-carrito'); 
     let precioTotal = document.querySelector('.precio-total') 
     let cantidadProductos = document.querySelector('.contador'); 
+    let terminarCompra = document.getElementById('pago');
      
      
     let compra = []; 
@@ -57,8 +58,8 @@ d.addEventListener("DOMContentLoaded", (e)=>{
     loadEventListenrs(); 
     function loadEventListenrs(){ 
         contenidoCarrito.addEventListener('click', agregarProducto); 
-    
         contenidoCompra.addEventListener('click', eliminarProducto); 
+        terminarCompra.addEventListener('click', efectuarPago);
     } 
      
     function agregarProducto(e){ 
@@ -66,6 +67,7 @@ d.addEventListener("DOMContentLoaded", (e)=>{
         if (e.target.classList.contains('btn-agregar')){ 
         const selectProducto = e.target.parentElement;
         cargarContenido(selectProducto); 
+        swal('titulo', 'contenido', 'error');
         } 
     } 
      
@@ -77,7 +79,7 @@ d.addEventListener("DOMContentLoaded", (e)=>{
                 if (value.id == deleteId){ 
                 let precioReduce = value.precio * value.cantidad; 
                 total = total - precioReduce;  
-                                    } 
+                } 
             }); 
                 compra = compra.filter(producto => producto.id !== deleteId); 
                 contadorProductos--; 
@@ -87,11 +89,23 @@ d.addEventListener("DOMContentLoaded", (e)=>{
                     document.getElementById('vacio').style.display = 'block';
                     precioTotal.innerHTML = 0; 
                     cantidadProductos.innerHTML = 0; 
+                    swal('Pedido eliminado','Su pedido fue eliminado del carrito', 'success');
                 } 
                 loadHtml(); 
         } 
+
+        //  SWAL: Agregué una ventana para la confirmacion de pago --
+
+    function efectuarPago(){
+        swal({
+            title: 'Efectuar pago',
+            text: 'Seras redirigido al portal de pago',
+            icon: 'warning',
+            buttons: ['cancelar', 'continuar']
+        })
+    }
      
-        function cargarContenido(producto){ 
+    function cargarContenido(producto){ 
             const infoProducto = { 
                 imagen: producto.querySelector('div img').src, 
                 titulo: producto.querySelector('.text-title').textContent, 
@@ -147,8 +161,6 @@ d.addEventListener("DOMContentLoaded", (e)=>{
             function clearHtml(){ 
             contenidoCompra.innerHTML = ''; 
         }
-        
-
 
         //  -------------------------
 
