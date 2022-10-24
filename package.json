@@ -1,0 +1,20 @@
+{
+  "name": "proyecto-js-walter-chavez",
+  "version": "1.0.0",
+  "description": "Proyecto Hamburgueseria. \r Implementando JavaScrip.\r ![image](https://user-images.githubusercontent.com/56324408/188516873-d57f109e-1e56-4b4f-9553-9325d1caa0b4.png)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walterCarp/Curso-Js-Coder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/walterCarp/Curso-Js-Coder/issues"
+  },
+  "homepage": "https://github.com/walterCarp/Curso-Js-Coder#readme"
+}

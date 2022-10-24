@@ -8,7 +8,7 @@ export default function hamburgerMenu(panelBtn, panel, menuLink){
             d.querySelector(panelBtn).classList.toggle("is-active");
         }
 
-        if(e.target.matches?.menuLink){
+        if(e.target.matches(menuLink)){
             d.querySelector(panel).classList.remove("is-active");
             d.querySelector(panelBtn).classList.remove("is-active");
         }

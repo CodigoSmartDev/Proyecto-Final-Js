@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.2.1/hamburgers.min.css">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/sweetalert2.min.css">
+
     <title>MaxBurger</title>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
 </head>
 
     <body id="body">
@@ -23,31 +25,21 @@
 
                 <!-- carrito -->
             <div class="container-carrito">
-                <div>
-                    <img onmouseover="showCart(this)" class="carrito" src="./imagenes/png/shopping-cart.png" alt="carrito">
-                    <p class="contador">0</p>
+                <div id="carrito">
+                    <img class="carrito" src="./imagenes/png/shopping-cart.png" alt="carrito">
+                    <p id="contador">0</p>
                 </div>
-                <div class="productos-carrito" id="productos-id">
-                    <p class="btn-cerrar" onclick="closeBtn()">X</p>
+                <div class="productos-carrito" id="cont-carrito">
+                    <button id="btn-cerrar">X</button>
                     <h3>Carrito</h3>
-                <div class="items-carrito" id="carrito">
-                    <h4 id="vacio">sin pedidos</h4>
-
-                    <div class="item">
-                        <img src="./imagenes/menu/triple.png" alt="">
-                        <div class="item-content">
-                            <h5>Hamburguesa Triple</h5>
-                            <h5 class="carito-precio">$ 45</h5>
-                            <h6>cantidad: 3</h6>
+                    <div class="items-carrito" id="lista-carrito">
+                        <div class="cont-pedidos">
+                            
                         </div>
-                        <div>
-                            <span class="btn-eliminar">X</span>
-                        </div>
+                        <h4>Total: $<strong class="precio-total" id="precioTotal">0</strong></h4>
+                        <button id="vaciar-carrito" class="vaciar">Vaciar Carrito</button>
+                        <button class="btn-pago" id="pago">Continuar con el pago</button>
                     </div>
-
-                </div>
-                    <h4>Total: $<strong class="precio-total">0</strong></h4>
-                    <button class="btn-pago" id="pago">Continuar con el pago</button>
                 </div>
             </div>
 
@@ -78,13 +70,7 @@
                 <!-- Hero -->
 
             <div class="hero">
-                <div>
-                    <div id="h1" class="titulo">
-                        <h1>MaxBurger</h1>
-                    </div>
-                    <h2>Las mejores Hamburguesas</h2>
-                    <input type="search" name="buscador" class="search" id="buscador" placeholder="buscar">
-                </div>
+                
             </div>
 
             <!-- redes sociales -->
@@ -99,7 +85,7 @@
                         </svg>
                     </a>
 
-                    <!-- instagram -->
+                    <!-- instagram --> 
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                             <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"></path>
@@ -117,12 +103,20 @@
 
             </section>
 
+            <!-- boton menu -->
+
+            <button class="panel-btn hamburger hamburger--elastic" type="button" id="panel-btn">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </button>
+
             <!-- panel deslizante -->
 
             <aside class="panel">
                 <div class="menu">
                     <ul>
-                        <li><a href="#body"class="section">Menu</a></li>
+                        <li><a href="#body"class="section">Hamburguesas</a></li>
                         <li><a href="#section2" class="section">combos</a></li>
                         <li><a href="#section3" class="section">ensaladas</a></li>
                         <li><a href="#section4" class="section">promociones</a></li>
@@ -130,102 +124,10 @@
                 </div>
             </aside>
 
-            <!-- boton menu -->
+            <!-- Lista de productos -->
 
-            <button class="panel-btn hamburger hamburger--elastic" type="button">
-                <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                </span>
-            </button>
-
-            <section class="contenedor-productos">
-                <div class="productos">
-
-                    <div class="producto">
-                        <div class="card" id="menu">
-                            <img class="card-img" src= "./imagenes/menu/triple.png">
-                                <div class="card-info">
-                                    <h3 class="text-title">Hamburguesa Triple </h3>
-                                    <p class="text-body">Triple carne, extra chaddar, bacon y salsa. Incluyen papas y gaseosa.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="precio">$1250</span>
-                                    <a href="" class="btn-agregar" id="agregar" data-id="1">Agregar</a>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="card" id="menu">
-                            <img class="card-img" src= "./imagenes/menu/triple.png">
-                                <div class="card-info">
-                                    <h3 class="text-title">Hamburguesa Triple </h3>
-                                    <p class="text-body">Triple carne, extra chaddar, bacon y salsa. Incluyen papas y gaseosa.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="precio">$1250</span>
-                                    <a href="" class="btn-agregar" id="agregar" data-id="2">Agregar</a>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="card" id="menu">
-                            <img class="card-img" src= "./imagenes/menu/triple.png">
-                                <div class="card-info">
-                                    <h3 class="text-title">Hamburguesa Triple </h3>
-                                    <p class="text-body">Triple carne, extra chaddar, bacon y salsa. Incluyen papas y gaseosa.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="precio">$1250</span>
-                                    <a href="" class="btn-agregar" id="agregar" data-id="3">Agregar</a>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="card" id="menu">
-                            <img class="card-img" src= "./imagenes/menu/triple.png">
-                                <div class="card-info">
-                                    <h3 class="text-title">Hamburguesa Triple </h3>
-                                    <p class="text-body">Triple carne, extra chaddar, bacon y salsa. Incluyen papas y gaseosa.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="precio">$1250</span>
-                                    <a href="" class="btn-agregar" id="agregar" data-id="4">Agregar</a>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="card" id="menu">
-                            <img class="card-img" src= "./imagenes/menu/triple.png">
-                                <div class="card-info">
-                                    <h3 class="text-title">Hamburguesa Triple </h3>
-                                    <p class="text-body">Triple carne, extra chaddar, bacon y salsa. Incluyen papas y gaseosa.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="precio">$1250</span>
-                                    <a href="" class="btn-agregar" id="agregar" data-id="5">Agregar</a>
-                                </div>
-                        </div>
-                    </div>
-
-                    <div class="producto">
-                        <div class="card" id="menu">
-                            <img class="card-img" src= "./imagenes/menu/triple.png">
-                                <div class="card-info">
-                                    <h3 class="text-title">Hamburguesa Triple </h3>
-                                    <p class="text-body">Triple carne, extra chaddar, bacon y salsa. Incluyen papas y gaseosa.</p>
-                                </div>
-                                <div class="card-footer">
-                                    <span class="precio">$1250</span>
-                                    <a href="" class="btn-agregar" id="agregar" data-id="6">Agregar</a>
-                                </div>
-                        </div>
-                    </div>
-
-                </div>
+            <section class="contenedor-productos" id="lista-productos">
+               
             </section>
 <!--
                     <div class="card">
@@ -617,23 +519,16 @@
             </section>
         -->
             
-            <footer class="">
+            <footer class="footer">
                 <p class="">Codigo Smart T.M.</p>
             </footer>
 
         </main>
 
-            <script>
-                function showCart(x){
-                    document.getElementById("productos-id").style.display = "block";
-                }
-                function closeBtn(){
-                    document.getElementById("productos-id").style.display = "none";
-                }
-            </script>
-
             <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/js/all.min.js" integrity="sha512-naukR7I+Nk6gp7p5TMA4ycgfxaZBJ7MO5iC3Fp6ySQyKFHOGfpkSZkYVWV5R7u7cfAicxanwYQ5D1e17EfJcMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+            <script src="/js/sweetalert2.min.js"></script>
+            <script src="/Js/stock_productos.js"></script>
+            <script src="/Js/carrito.js"></script>
             <script src="/index.js" type="module"></script>
             
     </body>
