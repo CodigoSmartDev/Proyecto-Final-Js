@@ -161,8 +161,8 @@
 // }
 
 
-const contenedorProductos = document.getElementById('lista-productos');
-const contenedorCarrito = document.getElementById('carrito');
+const contenedorProductos = document.getElementById('section1');
+const contenedorCarrito = document.getElementById('cont-pedidos');
 const botonVaciar = document.getElementById('vaciar-carrito');
 const contadorCarrito = document.getElementById('contador');
 const cantidad = document.getElementById('cantidad');
@@ -173,41 +173,42 @@ const close = document.getElementById('btn-cerrar');
 
 let carrito = [];
 
+function openCart(){
+    document.getElementById("cont-carrito").style.display = "block";
+}
+expandirCarrito.addEventListener('click', openCart);
+
+function closeCart(){
+    document.getElementById("cont-carrito").style.display = "none";
+}
+close.addEventListener('click', closeCart);
+
 document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('carrito')){
-        carrito = JSON.parse(localStorage.getItem('carrito'))
-        // actualizarCarrito()
+       carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito();
     }
 });
 
 botonVaciar.addEventListener('click', () => {
     carrito.length = 0
-    actualizarCarrito()
+    actualizarCarrito();
+    vaciarLs();
 });
 
-function openCart(){
-            document.getElementById("cont-carrito").style.display = "block";
-        }
-        expandirCarrito.addEventListener('click', openCart);
-
-function closeCart(){
-            document.getElementById("cont-carrito").style.display = "none";
-        }
-        close.addEventListener('click', closeCart);
-
-// Render de los prods en el HTML
+// Render de los productos en el HTML
 stockProductos.forEach((producto) => {
     const div = document.createElement('div')
     div.classList.add('producto')
     div.innerHTML = `
         <div class="card" id="menu">
-            <img class="card-img" src=${producto.img} alt="hamburguesa">
+            <img class="card-img" src="${producto.img}" alt="hamburguesa">
             <div class="card-info">
                 <h3 class="text-title">${producto.nombre}</h3>
                 <p class="text-body">${producto.desc}</p>
             </div>
             <div class="card-footer">
-                <span class="precio">${producto.precio}</span>
+                <span class="precio">$ ${producto.precio}</span>
                 <a href="" class="btn-agregar" id="agregar${producto.id}"><i class="fa-solid fa-cart-plus"></i></a>
             </div>
         </div>
@@ -217,17 +218,17 @@ stockProductos.forEach((producto) => {
     const boton = document.getElementById(`agregar${producto.id}`)
     boton.addEventListener('click', () => {
         agregarAlCarrito(producto.id)
-
     })
 });
 
 const agregarAlCarrito = (prodId) => {
     const existe = carrito.some (prod => prod.id === prodId)
     if (existe){ 
-        const prod = carrito.map (prod => {
+        prod = carrito.map (prod => {
             if (prod.id === prodId){
-                prod.cantidad++
-                    swal({  type: 'success',
+                prod.cantidad++;
+                    swal({  
+                    type: 'success',
                     title: 'Exitoso',
                     text: `Tu pedido se agrego al carrito`,
                     timer: 2000,
@@ -238,33 +239,26 @@ const agregarAlCarrito = (prodId) => {
             }
         })
     } else {
-        const item = stockProductos.find((prod) => prod.id === prodId)
+        const item = stockProductos.find( prod => prod.id === prodId)
         carrito.push(item)
     }
-    console.log('agregarAlCarrito')
     
     actualizarCarrito()
 };
 
-const eliminarDelCarrito = (prodId) => {
-    const item = carrito.find((prod) => prod.id === prodId)
-    const indice = carrito.indexOf(item)
-    carrito.splice(indice, 1)
-    actualizarCarrito()
-};
-
 const actualizarCarrito = () => {
-    contenedorCarrito.innerHTML = "",
+    contenedorCarrito.innerHTML = ""
     carrito.forEach((prod) => {
-        const div = document.createElement('div')
-        div.className = ('productoEnCarrito')
-        div.innerHTML = `
-        <p>${prod.nombre}</p>
-        <p>Precio:$${prod.precio}</p>
-        <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+        const tr = document.createElement('tr');
+        tr.className = ('productoEnCarrito');
+        tr.innerHTML = `
+        <td><img class="img-carrito" src="${prod.img}"><td>
+        <td class="nombre">${prod.nombre}<td>
+        <td class="precio">$${prod.precio}<td>
+        <td class="cantidad"><span id="cantidad">${prod.cantidad}</span><td>
         <button onclick="eliminarDelCarrito(${prod.id})" class="eliminar-producto"><i class="fas fa-trash-alt"></i></button>
         `
-        contenedorCarrito.appendChild(div);
+        contenedorCarrito.appendChild(tr);
         
         localStorage.setItem('carrito', JSON.stringify(carrito));
     });
@@ -272,3 +266,15 @@ const actualizarCarrito = () => {
     contadorCarrito.innerText = carrito.length
     precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.cantidad * prod.precio, 0)
 }
+
+const eliminarDelCarrito = (prodId) => {
+    const item = carrito.find((prod) => prod.id === prodId)
+    const indice = carrito.indexOf(item)
+    carrito.splice(indice, 1)
+    actualizarCarrito()
+
+};
+
+function vaciarLs() {
+    localStorage.clear();  
+} 

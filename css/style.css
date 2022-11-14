@@ -186,7 +186,7 @@ input:checked + .slider::before{
   right: 120px;
 }
 
-.carrito{
+.logo-carrito{
   width: 40px;
   height: 38px;
   cursor: pointer;
@@ -201,36 +201,20 @@ input:checked + .slider::before{
   position: absolute;
   text-align: center;
   top: 52px;
-  right: -110px;
+  right: -100px;
   background: rgb(211, 207, 207);
   padding: 0 18px;
   border-radius: 10px;
   box-shadow: 0 3px 10px rgb(0, 0, 0 / 20%);
   font-size: 15px;
-  min-width: 290px;
+  width: 330px;
 }
 
-.productos-carrito > h3{
-  margin-top: 10px;
-  padding: 3px;
-}
-
-.cont-pedidos{
+#cont-pedidos{
+  min-height: 30px;
   max-height: 250px;
   contain: content;
   overflow-y: scroll;
-}
-
-  /* Personalizacion barra Scroll */
-
-.cont-pedidos::-webkit-scrollbar{
-  width: 5px;
-}
-
-.cont-pedidos::-webkit-scrollbar-thumb{
-  background: #fbaf32;
-  border-radius: 5px;
-  margin-left: 5px;
 }
 
 #btn-cerrar{
@@ -247,29 +231,57 @@ input:checked + .slider::before{
   cursor: pointer;
 }
 
-tr > td{
-  padding: 5px;
-  margin: auto;
-  max-height: 30px;
-  max-width: 150px;
+.title-carrito{
+  padding: 20px;
+  font-style: oblique;
+  font-size: 25px;
+}
+
+  /* Personalizacion barra Scroll */
+
+#cont-pedidos::-webkit-scrollbar{
+  width: 5px;
+}
+
+#cont-pedidos::-webkit-scrollbar-thumb{
+  background: #fbaf32;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+td{
+  width: 20px;
+  height: 80px;
   border-bottom: solid .3px #9b9a98;
 }
 
-.titulo-producto{
+.nombre{
   font-weight: 900;
   color: #133348;
-  height: 5px;
+  padding: 0px 15px;
 }
 
-.precio-producto{
+.productoEnCarrito .precio{
   color: #4E9F3D;
   font-weight: 900;
+  padding-right: 20px;
 }
 
-.cantidad-producto{
-  font-weight: 900;
-  color: #133348;
-  height: 5px;
+.img-carrito{
+  position: relative;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+}
+.productoEnCarrito .cantidad{
+  font-weight: 400;
+  color: #f0f6f6;
+  background: #909192;
+  border-radius: 10%;
+}
+
+.productos-carrito h4{
+  margin-top: 20px;
 }
 
 #contador{
@@ -281,23 +293,28 @@ tr > td{
 }
 
 .eliminar-producto{
+  position: relative;
+  left: 15px;
+  bottom: 10px;
   text-decoration: none;
   color: #fff;
   background-color: darkred;
   border-radius: 15%;
+  border: none;
   font-weight: bold;
-  padding: 2px 5px;
+  padding: 3px 5px;
 }
 
 .precio-total{
   color: #133348;
+  padding-top: 25px;
 }
 
 .vaciar{
   background: #c12206;
   border-radius: 5px;
   border: none;
-  margin-top: 20px;
+  margin-top: 10px;
   height: 25px;
   padding: 0 5px;
   margin-bottom: 5px;
@@ -312,6 +329,7 @@ tr > td{
   height: 25px;
   padding: 0 9px;
   margin-left: 9px;
+  margin-bottom: 5px;
   font-weight: 900;
   color: #fff;
 }
@@ -440,7 +458,7 @@ ul {
 
     /* Contenido Tarjetas */
 
-.contenedor-productos{
+.section{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   max-width: 90%;
