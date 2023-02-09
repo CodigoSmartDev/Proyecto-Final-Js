@@ -8,9 +8,8 @@ const d = document;
 d.addEventListener("DOMContentLoaded", (e)=>{
     
     searchFilters(".search", ".card");
-     
-    hamburgerMenu(".panel-btn", ".panel", ".menu ul a");
 
+    hamburgerMenu(".panel-btn", ".panel", ".menu ul a");
 
 });
 
@@ -43,7 +42,6 @@ function darckMode(){
 }
 darckMode();
 
-    // render de productos
 
 
 
